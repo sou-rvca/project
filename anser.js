@@ -1,43 +1,44 @@
 const isValid = (s) => {
-    let result = Boolean(true);
-    let text = s.split('');
-    let a = text.slice();
+    let result = true;
+    let chars = s.split('');
+    let copy = chars.slice();
 
     for(let i = 0; i < s.length; i++){
-        if (a[i] === ")" || a[i] === "}" || a[i] === "]"){
+        if (copy[i] === ")" || copy[i] === "}" || copy[i] === "]"){
             let open = "";
-            let close = a[i];
-            let mismach1 = "";
-            let mismach2 = "";
+            let close = copy[i];
+            let mismatch1 = "";
+            let mismatch2 = "";
 
             if (close === ")"){
                     open = "(";
-                    mismach1 = "{";
-                    mismach2 = "[";
+                    mismatch1 = "{";
+                    mismatch2 = "[";
             }else if (close === "}"){
                     open = "{";
-                    mismach1 = "(";
-                    mismach2 = "[";
+                    mismatch1 = "(";
+                    mismatch2 = "[";
             }else if (close === "]"){
                     open = "[";
-                    mismach1 = "(";
-                    mismach2 = "{";
+                    mismatch1 = "(";
+                    mismatch2 = "{";
             }
 
-            let matched = Boolean(false);
+            let matched = false;
 
             for (let j = i - 1; j >= 0; j--){
-                if (a[j] === ("finish")) continue; 
+                if (copy[j] === ("finish")) continue; 
 
-                if (a[j] === (open)){
-                    a[j],a[i] = "finish";
+                if (copy[j] === open){
+                    copy[j] = "finish";
+                    copy[i] = "finish";
                     matched = true;
                     break;
-                } else if (a[j] === ")" || a[j] === "}" || a[j] === "]"){
+                } else if (copy[j] === ")" || copy[j] === "}" || copy[j] === "]"){
                     
                     result = false;
                     break;
-                }else if (a[j] === mismach1 || a[j] === mismach2){
+                }else if (copy[j] === mismatch1 || copy[j] === mismatch2){
                     
                     result = false;
                     break;
