@@ -1,58 +1,56 @@
 const isValid = (s) => {
-    let result = Boolean(true);
-    let num = s.length;
-    var a = Array[num];
-    let y = s.split('');
-    console.log(y);
+    let result = true;
+    let chars = s.split('');
+    let copy = chars.slice();
 
-    for(let j = 0; j < num; j++){
-        if (a[j].equals(")") || a[j].equals("}") || a[j].equals("]")){
+    for(let i = 0; i < s.length; i++){
+        if (copy[i] === ")" || copy[i] === "}" || copy[i] === "]"){
             let open = "";
-            let close = a[j];
-            let error = "";
-            let error1 = "";
+            let close = copy[i];
+            let mismatch1 = "";
+            let mismatch2 = "";
 
-            if (close.equals(")")){
+            if (close === ")"){
                     open = "(";
-                    error = "{";
-                    error1 = "[";
-            } else if (close.equals("}")) {
+                    mismatch1 = "{";
+                    mismatch2 = "[";
+            }else if (close === "}"){
                     open = "{";
-                    error = "(";
-                    error1 = "[";
-            }else if (close.equals("]")) {
+                    mismatch1 = "(";
+                    mismatch2 = "[";
+            }else if (close === "]"){
                     open = "[";
-                    error = "(";
-                    error1 = "{";
+                    mismatch1 = "(";
+                    mismatch2 = "{";
             }
 
-            let matched = Boolean(false);
+            let matched = false;
 
-            for (let k = j - 1; k >= 0; k--) {
-                if (a[k].equals("t")) continue; 
+            for (let j = i - 1; j >= 0; j--){
+                if (copy[j] === ("finish")) continue; 
 
-                if (a[k].equals(open)) {
-                    a[k] = "t";  
-                    a[j] = "t";  
+                if (copy[j] === open){
+                    copy[j] = "finish";
+                    copy[i] = "finish";
                     matched = true;
                     break;
-                } else if (a[k].equals(")") || a[k].equals("}") || a[k].equals("]")) {
+                } else if (copy[j] === ")" || copy[j] === "}" || copy[j] === "]"){
                     
                     result = false;
                     break;
-                }else if (a[k].equals(error) || a[k].equals(error1) ) {
+                }else if (copy[j] === mismatch1 || copy[j] === mismatch2){
                     
                     result = false;
                     break;
                 }
             }
-            if (!matched) {
+            if (!matched){
                     result = false;
                     break;
             }
         }
-        System.out.println(result);
     }
+    return result;
 };
 
 let s = '()';
