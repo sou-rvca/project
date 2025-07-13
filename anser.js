@@ -2,7 +2,7 @@ const isValid = (s) => {
     let result = Boolean(true);
     let num = s.length;
     let y = s.split('');
-    let a = y.split();
+    let a = y.slice();
 
     for(let j = 0; j < num; j++){
         if (a[j] === ")" || a[j] === "}" || a[j] === "]"){
