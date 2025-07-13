@@ -3,7 +3,6 @@ const isValid = (s) => {
     let num = s.length;
     let y = s.split('');
     let a = y.split();
-    console.log(y);
 
     for(let j = 0; j < num; j++){
         if (a[j] === ")" || a[j] === "}" || a[j] === "]"){
@@ -12,15 +11,15 @@ const isValid = (s) => {
             let error = "";
             let error1 = "";
 
-            if (close.equals(")")){
+            if (close === ")"){
                     open = "(";
                     error = "{";
                     error1 = "[";
-            } else if (close.equals("}")){
+            }else if (close === "}"){
                     open = "{";
                     error = "(";
                     error1 = "[";
-            }else if (close.equals("]")){
+            }else if (close === "]"){
                     open = "[";
                     error = "(";
                     error1 = "{";
@@ -29,9 +28,9 @@ const isValid = (s) => {
             let matched = Boolean(false);
 
             for (let k = j - 1; k >= 0; k--){
-                if (a[k].equals("t")) continue; 
+                if (a[k] === ("t")) continue; 
 
-                if (a[k].equals(open)){
+                if (a[k] === (open)){
                     a[k] = "t";  
                     a[j] = "t";  
                     matched = true;
