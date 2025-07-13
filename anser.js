@@ -1,45 +1,43 @@
 const isValid = (s) => {
     let result = Boolean(true);
-    let num = s.length;
-    let y = s.split('');
-    let a = y.slice();
+    let text = s.split('');
+    let a = text.slice();
 
-    for(let j = 0; j < num; j++){
-        if (a[j] === ")" || a[j] === "}" || a[j] === "]"){
+    for(let i = 0; i < s.length; i++){
+        if (a[i] === ")" || a[i] === "}" || a[i] === "]"){
             let open = "";
-            let close = a[j];
-            let error = "";
-            let error1 = "";
+            let close = a[i];
+            let mismach1 = "";
+            let mismach2 = "";
 
             if (close === ")"){
                     open = "(";
-                    error = "{";
-                    error1 = "[";
+                    mismach1 = "{";
+                    mismach2 = "[";
             }else if (close === "}"){
                     open = "{";
-                    error = "(";
-                    error1 = "[";
+                    mismach1 = "(";
+                    mismach2 = "[";
             }else if (close === "]"){
                     open = "[";
-                    error = "(";
-                    error1 = "{";
+                    mismach1 = "(";
+                    mismach2 = "{";
             }
 
             let matched = Boolean(false);
 
-            for (let k = j - 1; k >= 0; k--){
-                if (a[k] === ("t")) continue; 
+            for (let j = i - 1; j >= 0; j--){
+                if (a[j] === ("finish")) continue; 
 
-                if (a[k] === (open)){
-                    a[k] = "t";  
-                    a[j] = "t";  
+                if (a[j] === (open)){
+                    a[j],a[i] = "finish";
                     matched = true;
                     break;
-                } else if (a[k] === ")" || a[k] === "}" || a[k] === "]"){
+                } else if (a[j] === ")" || a[j] === "}" || a[j] === "]"){
                     
                     result = false;
                     break;
-                }else if (a[k] === error || a[k] === error1){
+                }else if (a[j] === mismach1 || a[j] === mismach2){
                     
                     result = false;
                     break;
